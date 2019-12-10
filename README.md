@@ -1,0 +1,2 @@
+# JavascriptCoursework
+x.split(' ').join('')
