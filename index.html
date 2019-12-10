@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>JS Coursework Challenge 2</title>
+<link rel="stylesheet" href="qunit-2.9.2.css">
+<style> .red { background: red; color: white; }</style>
+
+<div id="qunit">
+	<main id=main>
+	</main>
+</div>
+
+<div id="qunit-fixture"></div>
+
+<section id=emoji>
+	<h1>Emoji</h1>
+	<p id=e1>:-)</p>
+	<p id=e2>(TM)</p>
+	<p id=e3>SoftEng(TM) :-)</p>
+	<p id=e4>Do you &lt;3 me now?</p>
+	<p id=e5>:-):-):-)&lt;3&lt;3&lt;3</p>
+</section>
+
+<section id=emojiAdvanced>
+	<h1>Emoji Advanced</h1>
+	<p id=ea1>:-)</p>
+	<p id=ea2>(TM)</p>
+	<p id=ea3>SoftEng(TM) <span>:-</span>)</p>
+	<p id=ea4>Do you &lt;3 me now?</p>
+	<p id=ea5>:-):-):-)&lt;3&lt;3&lt;3</p>
+</section>
+
+<section id=clickables>
+	<p>Click me</p>
+	<p>Click me</p>
+	<p>Click me</p>
+	<p>Click me</p>
+	<p>Click me</p>
+</section>
+
+ <section id=flag1>
+  <h1>Draw the flag of Scotland</h1>
+  <div class=clouds>
+    <canvas id="scotland" width="320" height="192"></canvas>
+  </div>
+  <p>It should look like this:</p>
+  <div>
+    <img src="i/saltire.png" alt="This the the Scottish flag.  Comprising a blue background emblazoned with a white cross.">
+  </div>
+</section>
+
+ <section id=flag2>
+  <h1>Draw the Union Jack</h1>
+  <div class=clouds>
+    <canvas id="union" width="320" height="160"></canvas>
+  </div>
+  <p>It should look like this:</p>
+  <div>
+    <img src="i/union.png" alt="This the the Union Flag.  It's more complicated than it looks because it's not symmetrical.">
+  </div>
+</section>
+
+<section id=flag2>
+  <h1>Pies</h1>
+  <div id=pies>
+  </div>
+</section>
+
+
+<script src="qunit-2.9.2.js "></script>
+<script src="qunit-ext.js "></script>
+<script src="index.js "></script>
+<script src="tests.js "></script>
