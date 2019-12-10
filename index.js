@@ -14,13 +14,9 @@ function sentenceWordSums(sentence) {
 	let results = [];
 	let words = sentence.split(' ');
 
-	//For each word in the sentence
-	let place = 0;
-	//console.log(words);
 	let arrayNum = 0;
 	//For each word in the sentence
 	for (let i = 0; i < words.length; i++) {
-		//console.log('words %' + words[i] + '%');
 		//Checks if the array element is empty and if true skips it.
 		if (words[i] != '') {
 			results[arrayNum] = sumOfCharacters(words[i]);
@@ -53,22 +49,14 @@ function palindrome(candidate, ignore) {
 		letters = candidate.split('');
 	}
 
-	console.log('letters', letters);
-	//console.log('ignore', ignore);
-
 	if (letters.length == 0) {
 		return false;
 	}
-
 	for (let i = 0; i < letters.length; i++) {
-		//console.log('letters', i, letters[i]);
 		let lastLocation = letters.length - 1 - i;
-		//console.log('compare', letters[i], letters[lastLocation]);
 
-		if (letters[i] == letters[lastLocation]) {
-			//console.log('single', letters[i]);
-		} else {
-			return false; //If it doesnt match
+		if (letters[i] != letters[lastLocation]) {
+			return false;
 		}
 	}
 	return true;
