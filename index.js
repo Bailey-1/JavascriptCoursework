@@ -44,7 +44,7 @@ function palindrome(candidate, ignore) {
 		letters = candidate
 			.split(' ')
 			.join('')
-			.split(''); //Pretty cool right
+			.split('');
 	} else {
 		letters = candidate.split('');
 	}
@@ -60,4 +60,26 @@ function palindrome(candidate, ignore) {
 		}
 	}
 	return true;
+}
+
+function emojify(candidate) {
+	candidate = candidate.split('(TM)').join('™️');
+	candidate = candidate.split('/<3').join('❤️');
+	candidate = candidate.split(':-)').join('😀');
+	return candidate;
+}
+
+function pageEmojify(selector) {
+	const selection = document.querySelector(selector);
+	selection.innerHTML = emojify(selection.innerHTML);
+	return selection;
+}
+
+function treeEmojify(selector) {
+	let selection = document.querySelector(selector);
+	selection.innerHTML = emojify(selection.innerHTML);
+	console.log(selection.innerHTML);
+	console.log(selection.textContent);
+
+	return selection;
 }
