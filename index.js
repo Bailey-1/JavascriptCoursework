@@ -97,16 +97,115 @@ function clickAttacher(selector, cn) {
 
 function drawSaltire(elem) {
 	const c = elem.getContext('2d');
-
+	//Background
 	c.fillStyle = '#0065bd';
 	c.beginPath();
 	c.moveTo(0, 0);
-	c.moveTo(elem.width, 0);
-	c.moveTo(elem.height, elem.width);
-	c.moveTo(elem.height, 0);
+	c.lineTo(elem.width, 0);
+	c.lineTo(elem.width, elem.height);
+	c.lineTo(0, elem.height);
 	c.closePath();
 	c.fill();
+
+	//Crossed White lines
+	c.strokeStyle = 'white';
+	c.lineWidth = 40;
+
+	c.beginPath();
+	c.moveTo(0, 0);
+	c.lineTo(elem.width, elem.height);
+	c.moveTo(elem.width, 0);
+	c.lineTo(0, elem.height);
 	c.stroke();
 
-	return false;
+	return true;
+}
+
+function drawUnion(elem) {
+	const c = elem.getContext('2d');
+	const x = elem.width;
+	const y = elem.height;
+	const midX = x / 2;
+	const midY = y / 2;
+	const red = '#c8102e';
+
+	//Dark Blue Background
+	c.fillStyle = '#012169';
+	c.beginPath();
+	c.moveTo(0, 0);
+	c.lineTo(x, 0);
+	c.lineTo(x, y);
+	c.lineTo(0, y);
+	c.closePath();
+	c.fill();
+
+	//Diagonal White Lines
+	c.strokeStyle = 'white';
+	c.lineWidth = 40;
+
+	c.beginPath();
+	c.moveTo(0, 0);
+	c.lineTo(x, y);
+	c.moveTo(x, 0);
+	c.lineTo(0, y);
+	c.stroke();
+
+	//Diagonal Red Lines
+	c.fillStyle = red;
+	c.strokeStyle = 'white';
+	c.lineWidth = 1;
+
+	//Top left
+	c.beginPath();
+	c.moveTo(0, 0);
+	c.lineTo(midX, midY);
+	c.lineTo(midX - 26, midY);
+	c.lineTo(0, 0 + 15);
+	c.fill();
+	//Top Right
+	c.beginPath();
+	c.moveTo(x, 0);
+	c.lineTo(midX, midY);
+	c.lineTo(midX - 26, midY);
+	c.lineTo(x - 26, 0);
+	c.fill();
+	//Bottom Left
+	c.beginPath();
+	c.moveTo(0, y);
+	c.lineTo(midX, midY);
+	c.lineTo(midX + 26, midY);
+	c.lineTo(26, y);
+	c.fill();
+	//Bottom Right
+	c.beginPath();
+	c.moveTo(x, y);
+	c.lineTo(midX, midY);
+	c.lineTo(midX + 26, midY);
+	c.lineTo(x, y - 15);
+	c.fill();
+
+	//Diagonal White Lines
+	c.strokeStyle = 'white';
+	c.lineWidth = 50;
+
+	//Straight White Lines
+	c.beginPath();
+	c.moveTo(x / 2, 0);
+	c.lineTo(x / 2, y);
+	c.moveTo(0, y / 2);
+	c.lineTo(x, y / 2);
+	c.stroke();
+
+	//Draw red lines
+	c.strokeStyle = red;
+	c.lineWidth = 30;
+
+	c.beginPath();
+	c.moveTo(x / 2, 0);
+	c.lineTo(x / 2, y);
+	c.moveTo(0, y / 2);
+	c.lineTo(x, y / 2);
+	c.stroke();
+
+	return true;
 }
