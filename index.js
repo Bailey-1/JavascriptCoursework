@@ -64,22 +64,49 @@ function palindrome(candidate, ignore) {
 
 function emojify(candidate) {
 	candidate = candidate.split('(TM)').join('™️');
-	candidate = candidate.split('/<3').join('❤️');
+	candidate = candidate.split('<3').join('❤️');
 	candidate = candidate.split(':-)').join('😀');
+
+	//For some reason, it '<' shows up as '&lt;' and so doesnt get split by line 67. I think because i am using inner html instead.
+	candidate = candidate.split('&lt;3').join('❤️');
+
 	return candidate;
 }
 
 function pageEmojify(selector) {
 	const selection = document.querySelector(selector);
-	selection.innerHTML = emojify(selection.innerHTML);
+	selection.textContent = emojify(selection.textContent);
 	return selection;
 }
 
 function treeEmojify(selector) {
 	let selection = document.querySelector(selector);
 	selection.innerHTML = emojify(selection.innerHTML);
-	console.log(selection.innerHTML);
-	console.log(selection.textContent);
-
 	return selection;
+}
+
+function clickAttacher(selector, cn) {
+	let items = document.querySelectorAll(selector);
+
+	for (const item of items) {
+		item.addEventListener('click', function() {
+			this.classList.toggle(cn);
+		});
+	}
+}
+
+function drawSaltire(elem) {
+	const c = elem.getContext('2d');
+
+	c.fillStyle = '#0065bd';
+	c.beginPath();
+	c.moveTo(0, 0);
+	c.moveTo(elem.width, 0);
+	c.moveTo(elem.height, elem.width);
+	c.moveTo(elem.height, 0);
+	c.closePath();
+	c.fill();
+	c.stroke();
+
+	return false;
 }
