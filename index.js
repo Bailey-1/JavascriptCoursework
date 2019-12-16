@@ -69,7 +69,6 @@ function emojify(candidate) {
 
 	//For some reason, it '<' shows up as '&lt;' and so doesnt get split by line 67. I think because i am using inner html instead.
 	candidate = candidate.split('&lt;3').join('❤️');
-
 	return candidate;
 }
 
@@ -97,6 +96,7 @@ function clickAttacher(selector, cn) {
 
 function drawSaltire(elem) {
 	const c = elem.getContext('2d');
+
 	//Background
 	c.fillStyle = '#0065bd';
 	c.beginPath();
@@ -104,13 +104,11 @@ function drawSaltire(elem) {
 	c.lineTo(elem.width, 0);
 	c.lineTo(elem.width, elem.height);
 	c.lineTo(0, elem.height);
-	c.closePath();
 	c.fill();
 
 	//Crossed White lines
 	c.strokeStyle = 'white';
 	c.lineWidth = 40;
-
 	c.beginPath();
 	c.moveTo(0, 0);
 	c.lineTo(elem.width, elem.height);
@@ -142,7 +140,6 @@ function drawUnion(elem) {
 	//Diagonal White Lines
 	c.strokeStyle = 'white';
 	c.lineWidth = 40;
-
 	c.beginPath();
 	c.moveTo(0, 0);
 	c.lineTo(x, y);
@@ -153,42 +150,32 @@ function drawUnion(elem) {
 	//Diagonal Red Lines
 	c.fillStyle = red;
 	c.strokeStyle = 'white';
-	c.lineWidth = 1;
-
+	c.lineWidth = 0;
 	//Top left
 	c.beginPath();
 	c.moveTo(0, 0);
 	c.lineTo(midX, midY);
 	c.lineTo(midX - 26, midY);
 	c.lineTo(0, 0 + 15);
-	c.fill();
 	//Top Right
-	c.beginPath();
 	c.moveTo(x, 0);
 	c.lineTo(midX, midY);
 	c.lineTo(midX - 26, midY);
 	c.lineTo(x - 26, 0);
-	c.fill();
 	//Bottom Left
-	c.beginPath();
 	c.moveTo(0, y);
 	c.lineTo(midX, midY);
 	c.lineTo(midX + 26, midY);
 	c.lineTo(26, y);
-	c.fill();
 	//Bottom Right
-	c.beginPath();
 	c.moveTo(x, y);
 	c.lineTo(midX, midY);
 	c.lineTo(midX + 26, midY);
 	c.lineTo(x, y - 15);
 	c.fill();
 
-	//Diagonal White Lines
-	c.strokeStyle = 'white';
-	c.lineWidth = 50;
-
 	//Straight White Lines
+	c.lineWidth = 50;
 	c.beginPath();
 	c.moveTo(x / 2, 0);
 	c.lineTo(x / 2, y);
@@ -199,7 +186,6 @@ function drawUnion(elem) {
 	//Draw red lines
 	c.strokeStyle = red;
 	c.lineWidth = 30;
-
 	c.beginPath();
 	c.moveTo(x / 2, 0);
 	c.lineTo(x / 2, y);
