@@ -4,9 +4,7 @@
 
 function sumOfCharacters(candidate) {
 	let sum = 0;
-	for (let i = 0; i < candidate.length; i++) {
-		sum += candidate.charCodeAt(i);
-	}
+	for (let i = 0; i < candidate.length; i++) sum += candidate.charCodeAt(i);
 	return sum;
 }
 
@@ -20,7 +18,7 @@ function sentenceWordSums(sentence) {
 		//Checks if the array element is empty and if true skips it.
 		if (words[i] != '') {
 			results[arrayNum] = sumOfCharacters(words[i]);
-			arrayNum++; //Keeps this number seperate from i
+			arrayNum++; //Only increments if a valid word has been found.
 		}
 	}
 	return results;
@@ -31,33 +29,25 @@ function sumOfSentence(sentence, min) {
 	let words = sentence.split(' ');
 
 	for (const word of words) {
-		if (min <= word.length) {
-			total += sumOfCharacters(word);
-		}
+		if (min <= word.length) total += sumOfCharacters(word);
 	}
 	return total;
 }
 
 function palindrome(candidate, ignore) {
-	let letters;
-	if (ignore == true) {
-		letters = candidate
-			.split(' ')
-			.join('')
-			.split('');
-	} else {
-		letters = candidate.split('');
-	}
+	if (candidate.length == 0) return false;
 
-	if (letters.length == 0) {
-		return false;
-	}
+	//Splits the string into an array and removes spaces from it if 'ignore' is true.
+	let letters = ignore
+		? candidate
+				.split(' ')
+				.join('')
+				.split('')
+		: candidate.split('');
+
 	for (let i = 0; i < letters.length; i++) {
 		let lastLocation = letters.length - 1 - i;
-
-		if (letters[i] != letters[lastLocation]) {
-			return false;
-		}
+		if (letters[i] != letters[lastLocation]) return false;
 	}
 	return true;
 }
@@ -66,8 +56,6 @@ function emojify(candidate) {
 	candidate = candidate.split('(TM)').join('™️');
 	candidate = candidate.split('<3').join('❤️');
 	candidate = candidate.split(':-)').join('😀');
-
-	//For some reason, it '<' shows up as '&lt;' and so doesnt get split by line 67. I think because i am using inner html instead.
 	candidate = candidate.split('&lt;3').join('❤️');
 	return candidate;
 }
@@ -86,7 +74,6 @@ function treeEmojify(selector) {
 
 function clickAttacher(selector, cn) {
 	let items = document.querySelectorAll(selector);
-
 	for (const item of items) {
 		item.addEventListener('click', function() {
 			this.classList.toggle(cn);
@@ -97,7 +84,7 @@ function clickAttacher(selector, cn) {
 function drawSaltire(elem) {
 	const c = elem.getContext('2d');
 
-	//Background
+	//Background rectangle
 	c.fillStyle = '#0065bd';
 	c.beginPath();
 	c.moveTo(0, 0);
@@ -106,7 +93,7 @@ function drawSaltire(elem) {
 	c.lineTo(0, elem.height);
 	c.fill();
 
-	//Crossed White lines
+	//Draw the crossed White lines
 	c.strokeStyle = 'white';
 	c.lineWidth = 40;
 	c.beginPath();
@@ -192,6 +179,51 @@ function drawUnion(elem) {
 	c.moveTo(0, y / 2);
 	c.lineTo(x, y / 2);
 	c.stroke();
-
 	return true;
+}
+
+function makePi(elem, data) {
+	const newCanvas = document.createElement('canvas');
+	newCanvas.width = '600';
+	newCanvas.height = '600';
+	elem.appendChild(newCanvas);
+	const c = newCanvas.getContext('2d');
+
+	let total = 0;
+	for (const item of data) total += item.value;
+
+	const colors = ['#a88e1e', '#730a28', '#380984', '#0f4e7c'];
+
+	// Draw chart
+	let startAngle = 1.5 * Math.PI; //So the pi chart will start at a 12 oclock position not at 3.
+	let angleSize = 0;
+	for (let i = 0; i < data.length; i++) {
+		//Angle Size in Radians
+		angleSize = (2 * Math.PI * data[i].value) / total;
+		makeSector(c, startAngle, startAngle + angleSize, colors[i]);
+		//Add the size of the sector that has just been created to the start angel so it will continue from where it left.
+		startAngle += angleSize;
+	}
+
+	// Draw Text
+	c.font = '20px Arial';
+	let y = 30;
+	for (let i = 0; i < data.length; i++) {
+		c.beginPath();
+		c.fillStyle = colors[i];
+		c.fillText(data[i].name, 10, y);
+		y += 30;
+	}
+	return true;
+}
+
+function makeSector(c, startAngle, angleSize, color) {
+	const x = 300;
+	const y = 300;
+	c.fillStyle = color;
+
+	c.beginPath();
+	c.arc(x, y, 200, startAngle, angleSize, false);
+	c.lineTo(x, y);
+	c.fill();
 }
