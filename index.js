@@ -15,7 +15,7 @@ function sentenceWordSums(sentence) {
 
 	let arrayNum = 0;
 	for (let i = 0; i < words.length; i++) {
-		// Checks if the array element is empty and if true skips it.
+		// Checks if the array element is empty and if true skips it
 		if (words[i] != '') {
 			results[arrayNum] = sumOfCharacters(words[i]);
 			// Only increments if a valid word has been found which is why it doesnt use i
